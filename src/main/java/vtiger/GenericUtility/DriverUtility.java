@@ -149,12 +149,14 @@ public class DriverUtility {
 			driver.switchTo().frame(element);
 		}
 		public String takesScreenShot(WebDriver driver, String ScreenShotName) throws IOException {
-			TakesScreenshot ts=(TakesScreenshot)driver;
-			 File src = ts.getScreenshotAs(OutputType.FILE);
-			 String path=".\\Screenshots"+ScreenShotName+".png";
-			 File dest=new File(path);
-			 FileUtils.copyFile(src, dest);
-			 return dest.getAbsolutePath();
+
+			TakesScreenshot ts = (TakesScreenshot) driver;
+			File src = ts.getScreenshotAs(OutputType.FILE);
+			String path = ".\\Screenshots\\"+ScreenShotName+".png";
+			File dst = new File(path);
+			FileUtils.copyFile(src, dst);
+
+			return dst.getAbsolutePath(); // used for reporting in listeners
 		}
 		public void scrollDown(WebDriver driver) {
 			JavascriptExecutor js= (JavascriptExecutor)driver;

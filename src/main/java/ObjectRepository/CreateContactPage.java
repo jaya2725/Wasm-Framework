@@ -17,7 +17,7 @@ public class CreateContactPage extends DriverUtility {
 	private WebElement ContactNameEdt;
 	
 	
-	@FindBy(xpath="//input[@name='account_name']/following-sibling::img[@src='themes/softed/images/select.gif']")
+	@FindBy(xpath = "//input[@name='account_name']/following-sibling::img[@title='Select']")
 	private WebElement OrgLookUpImg;
 	
 	@FindBy(id="search_txt")

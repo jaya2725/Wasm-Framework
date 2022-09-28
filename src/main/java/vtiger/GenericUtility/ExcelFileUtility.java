@@ -63,20 +63,30 @@ public class ExcelFileUtility {
 		
 	}
 	//This method is used to read multiple data in same script
-	public Object[][] readMultipleDataFromExcel(String sheetname) throws EncryptedDocumentException, IOException{
-		FileInputStream fis=new FileInputStream(ConstantsUtility.ExcelFilePath);
+	public Object[][] readMultipleDataFromExcel(String sheetName) throws EncryptedDocumentException, IOException
+	{
+		FileInputStream fis = new FileInputStream(ConstantsUtility.ExcelFilePath);
 		Workbook wb = WorkbookFactory.create(fis);
-		Sheet sh = wb.getSheet(sheetname);
-		int Lastrow = sh.getLastRowNum();
-		int Lastcell = sh.getRow(0).getLastCellNum();
-		Object[][] data=new Object[Lastrow][Lastcell];
-		for(int i=0;i<Lastrow;i++) {
-			for(int j=0;j<Lastcell;j++) {
+		Sheet sh = wb.getSheet(sheetName);
+		int lastRow = sh.getLastRowNum();
+		int lastCell = sh.getRow(0).getLastCellNum();
+		
+		Object[][] data = new Object[lastRow][lastCell];
+		
+		for(int i=0;i<lastRow;i++)
+		{ 
+			for(int j=0;j<lastCell;j++)
+			{
 				data[i][j]=sh.getRow(i+1).getCell(j).getStringCellValue();
 			}
 		}
+		
 		return data;
 	}
-
 }
+		
+	
+	
+	
+	
 

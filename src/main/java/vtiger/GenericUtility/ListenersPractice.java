@@ -17,86 +17,106 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class ListenersPractice implements ITestListener {
 	ExtentReports report;
 	ExtentTest test;
-	
-	
+
 	public void onTestStart(ITestResult result) {
-		String methodname = result.getMethod().getMethodName();
-		//Reporter.log(methodname+"=> test script execution started",true);
-		test=report.createTest(methodname);
+		// TODO Auto-generated method stub
 		
+		String methodName = result.getMethod().getMethodName();
+		test = report.createTest(methodName); // test is created which will initialize the individual test execution
+		
+		//Reporter.log(methodName+" => test script execution started",true);
 	}
 
 	public void onTestSuccess(ITestResult result) {
-		String methodname = result.getMethod().getMethodName();
-		//Reporter.log(methodname+"=> is passed",true);
-		test.log(Status.PASS,methodname+"=====> passed");
+		// TODO Auto-generated method stub
 		
+		String methodName = result.getMethod().getMethodName();
+		test.log(Status.PASS, methodName+" ---> passed");
+		
+		//Reporter.log(methodName+" => is Passed",true);
 	}
 
 	public void onTestFailure(ITestResult result) {
-		JavaUtility jUtil=new JavaUtility();
-		DriverUtility dUtil=new DriverUtility();
+		// TODO Auto-generated method stub
+		
+		DriverUtility dUtil = new DriverUtility();
+		JavaUtility jUtil = new JavaUtility();
+		
+		//this will capture the exception occured
 		//String msg = result.getThrowable().toString();
-		String methodname = result.getMethod().getMethodName();
-		//Reporter.log(methodname+"=> is failed because=> "+msg,true);
-		test.log(Status.FAIL, methodname +"=====>failed");
 		
-		// this is will capture screenshot with date
-		String ScreenShotName=methodname+"-"+jUtil.getSystemDateInFormat();
-		//this will capture the screenshot and provide the screenshot and save it in file
-		try
-		{
-			String path=dUtil.takesScreenShot(BaseClass.sdriver, ScreenShotName);
-			test.addScreenCaptureFromPath(path);
-		}
-		catch(IOException e) {
-			e.printStackTrace();
+		//this will capture the current test method name 
+		String methodName = result.getMethod().getMethodName();
+		
+		//This will append method name with date for screenshot
+		String ScreenShotName = methodName+"-"+jUtil.getSystemDateInFormat();
+		
+		//This will log in report and console
+		test.log(Status.FAIL, methodName+ "---> Failed");
+		test.log(Status.FAIL, result.getThrowable());
+		
+		//Reporter.log(methodName+" => is failed because => "+msg,true);
+		
+		//This will capture the screen shot and provide the screen shot name and save it in folder
+		try {
+			String path = dUtil.takesScreenShot(BaseClass.sdriver, ScreenShotName);
 			
+			test.addScreenCaptureFromPath(path); //Navigate to screenshot path and attach it to the report
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		
-	
 	}
 
 	public void onTestSkipped(ITestResult result) {
-		//String msg = result.getThrowable().toString();
-		String methodname = result.getMethod().getMethodName();
-		//Reporter.log(methodname+"=> is skipped because=> "+msg,true);
-		test.log(Status.SKIP, methodname+"=====>Failed");
-	
+		// TODO Auto-generated method stub
 		
+		//String msg = result.getThrowable().toString();
+		String methodName = result.getMethod().getMethodName();
+		test.log(Status.SKIP, methodName +" ---> Skipped");
+		test.log(Status.SKIP, result.getThrowable());
+		
+		//Reporter.log(methodName+" => is skipped because => "+msg,true);
 	}
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		
+		// TODO Auto-generated method stub
+	
 	}
 
 	public void onTestFailedWithTimeout(ITestResult result) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	public void onStart(ITestContext context) {
-		// start of suite execution
-		//configure the extent reports
-		ExtentSparkReporter htmlReport = new ExtentSparkReporter(".\\extentReports\\Report-"+new JavaUtility().getSystemDateInFormat()+".html");
-		htmlReport.config().setDocumentTitle("WASM-5 Vtiger Execution Report");
+		// TODO Auto-generated method stub
+		//Start of suite execution
+		/*Configure the extent reports*/                           // inside ExtentReports - Report-06 sep 2022 10-38-41.html
+		ExtentSparkReporter htmlReport = new ExtentSparkReporter(".\\ExtentReports\\Report-"+ new JavaUtility().getSystemDateInFormat()+".html");
+		htmlReport.config().setDocumentTitle("WASM-5-Vtiger Execution Report");
 		htmlReport.config().setTheme(Theme.DARK);
-		htmlReport.config().setReportName("Vtiger execution Report");
+		htmlReport.config().setReportName("Vtiger Execution Report");
 		
-		ExtentReports report=new ExtentReports();
+		report = new ExtentReports();
 		report.attachReporter(htmlReport);
 		report.setSystemInfo("Base-Browser", "Chrome");
-		report.setSystemInfo("Base-Platform", "windows");
-		report.setSystemInfo("Base-URL","http://localhost:8888");
-		report.setSystemInfo("Reporter Name", "jaya");
-		
-}
-
-	public void onFinish(ITestContext context) {
-		// end of the suite
-		report.flush();
-		
+		report.setSystemInfo("Base-platform", "Windows");
+		report.setSystemInfo("Base-URL", "http://localhost:8888");
+		report.setSystemInfo("Reporter Name", "Jaya");
 		
 	}
+
+	public void onFinish(ITestContext context) {
+		// TODO Auto-generated method stub
+		//End of Suite execution
+		
+		report.flush(); // consolidate all the test script execution and dump the status into report
+		
+	}
+	
+	
 
 }

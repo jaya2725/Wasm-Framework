@@ -20,12 +20,15 @@ public class OrganizationInformationPage extends DriverUtility {
 	public WebElement getOrgHeaderTxt() {
 		return OrgHeaderTxt;
 	}
-	//business librariies
+	//business libraries
 	
 	public String getOrgHeader() {
 		String orgheader = OrgHeaderTxt.getText();
 		return orgheader;
 	}
+	 
+		
+	}
 	
 
-}
+

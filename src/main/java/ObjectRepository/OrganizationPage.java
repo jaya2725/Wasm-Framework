@@ -8,22 +8,31 @@ import org.openqa.selenium.support.PageFactory;
 import vtiger.GenericUtility.DriverUtility;
 
 public class OrganizationPage extends DriverUtility {
-	@FindBy(xpath="//img[@alt='Create Organization...']")
-	private WebElement createorganizationBtn;
-	
-	
-	public OrganizationPage (WebDriver driver) {
-		PageFactory.initElements(driver, this);
-	}
+	//declaration
+		@FindBy(xpath = "//img[@alt='Create Organization...']")
+		private WebElement createNewOrgLookUpImg;
+		
+		//Intialization
+		public OrganizationPage(WebDriver driver)
+		{
+			PageFactory.initElements(driver, this);
+		}
 
+		//Utilization
+		public WebElement getCreateOrgLookUpImg() {
+			return createNewOrgLookUpImg;
+		}
+		
+		//business library
+		/**
+		 * This method will click on create new organization look up image
+		 */
+		public void clickOnCreateNewOrgImg()
+		{
+			createNewOrgLookUpImg.click();
+		}
+		
+		
+		
 
-	public WebElement getCreateorganizationBtn() {
-		return createorganizationBtn;
 	}
-	//business library
-	public void ClickOnCreateOrganization() {
-		createorganizationBtn.click();
-	}
-	
-
-}

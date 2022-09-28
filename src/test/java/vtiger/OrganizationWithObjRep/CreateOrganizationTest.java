@@ -2,9 +2,11 @@ package vtiger.OrganizationWithObjRep;
 
 import java.io.IOException;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import ObjectRepository.CreateNewOrganizationPage;
@@ -17,8 +19,11 @@ import vtiger.GenericUtility.DriverUtility;
 import vtiger.GenericUtility.ExcelFileUtility;
 import vtiger.GenericUtility.JavaUtility;
 import vtiger.GenericUtility.PropertyFileUtility;
+@Listeners(vtiger.GenericUtility.ListenersPractice.class)
 
 public class CreateOrganizationTest {
+
+
 
 	@Test
 	public void CreateOrgTest() throws IOException {

@@ -18,6 +18,7 @@ import ObjectRepository.OrganizationInformationPage;
 import ObjectRepository.OrganizationPage;
 import vtiger.GenericUtility.BaseClass;
 import vtiger.GenericUtility.ExcelFileUtility;
+@Listeners(vtiger.GenericUtility.ListenersPractice.class)
 
 
 
@@ -27,7 +28,7 @@ import vtiger.GenericUtility.ExcelFileUtility;
 
 
 public class CreateContactWithOrgTest extends BaseClass {
-	@Test
+	@Test( retryAnalyzer = vtiger.GenericUtility.RetryAnalyserImplementation.class)
 	public void CreateContactWithOrgtest() throws EncryptedDocumentException, IOException {
 		String ORGNAME = eUtil.getDataFromExcel("sheet2", 4, 3)+jUtil.getRandomNumber();
 		String LASTNAME = eUtil.getDataFromExcel("sheet2", 4, 2);
@@ -38,7 +39,7 @@ public class CreateContactWithOrgTest extends BaseClass {
 		
 		
 		OrganizationPage op=new OrganizationPage(driver);
-		op.ClickOnCreateOrganization();
+		op.clickOnCreateNewOrgImg();
 		Reporter.log("create org look up img is clicked",true);
 		
 		CreateNewOrganizationPage cop=new CreateNewOrganizationPage(driver);
@@ -53,6 +54,7 @@ public class CreateContactWithOrgTest extends BaseClass {
 		String OrgHeader = oip.getOrgHeader();
 		System.out.println(OrgHeader);
 		Assert.assertEquals(OrgHeader.contains(ORGNAME), true);
+		
 		
 		
 		hp.ClickOnContactsLink();
